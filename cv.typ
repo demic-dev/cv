@@ -48,7 +48,7 @@
   degree: "Bachelor's of Science, Computer Science",
   consistent: true,
 )
-- Ranked in the top 25% of students in the faculty
+- Ranked in the top 25% of students faculty-wide
 - Relevant Coursework: Data Structures, Algebra, Calculus, Physics, Programming
 
 #edu(
@@ -58,9 +58,8 @@
   degree: "Erasmus+ Exchange",
   consistent: true,
 )
-
 - Relevant Coursework: Linear Programming, Machine Learning, Natural Language Processing, Bioinformatics
-- Successfully completed all courses in a new language (French)
+- Mastered all courses in French (a new language for me), ranking in the top 15% for half
 - Developed cross-cultural collaboration skills in multinational academic teams
 
 == Work Experience
@@ -71,8 +70,9 @@
   company: "IT University of Copenhagen",
   dates: dates-helper(start-date: "Sep 2025", end-date: "Dec 2025"),
 )
-- Working with large networks from Reddit to identify echo chambers and their dynamics
-- Conducting network analysis through Laplacians and Spectral Analysis
+- Analyzed large-scale networks to identify echo chambers and their dynamics
+- Conducted social network analysis using Laplacians and spectral methods
+- Applied a novel operator to study node feature propagation across directed networks (the first use in this context)
 
 #work(
   title: "Co-Founder",
@@ -81,16 +81,16 @@
   dates: dates-helper(start-date: "Apr 2025", end-date: "Dec 2025"),
 )
 - Conducted market research and managed communications with users, clients, and partners
-- Rapidly developed prototypes to gather user feedback
+- Built prototypes rapidly to collect user feedback
 
 #work(
   title: "Front-End Engineer",
   location: "Milan, IT",
   company: "Pane&Design s.r.l.",
-  dates: dates-helper(start-date: "Sep 2025", end-date: "Dec 2025"),
+  dates: dates-helper(start-date: "Oct 2021", end-date: "Dec 2022"),
 )
 - Developed and optimized high-traffic websites
-- Integrated microservices into large codebases
+- Integrated microservices into a large React codebase, reducing re-renders by 90%
 
 #work(
   title: "Full Stack Engineer",
@@ -121,6 +121,7 @@
   dates: "present",
 )
 - #link("https://github.com/pixelfed/pixelfed-rn/pulls?q=author%3Ademic-dev")[Contributed] with bug fixes to an open-source federated social media platform
+// - Minor contributions in Nix Flakes and NixPkgs
 
 == Projects
 
@@ -128,14 +129,11 @@
   name: "ALS Biomarker Identification",
   dates: "May 2024",
   url: "github.com/demic-dev/als-biomarker-identification-project",
-  // url: [#link(
-  //   "https://github.com/demic-dev/als-biomarker-identification-project",
-  // )[GitHub]],
 )
-- Developed a computational pipeline to analyze RNA-seq data from ALS patients using Python, `scikit-learn`, and `pandas`
+- Developed a computational pipeline to analyze RNA-seq data from ALS patients
 - Implemented statistical methods to identify differentially expressed genes that could serve as potential biomarkers
 
 == Skills
-- *Technologies*: Git, Nix, Docker, Linux
-- *Programming Languages*: Python, Typescript, Go, Rust, SQL, Bash scripting
+- *Technologies*: Git, Docker, Linux
+- *Programming Languages*: Typescript, Python, Nix, Go, Rust, SQL, Bash scripting
 - *Spoken Languages*: *Italian* (native), *English* (C1), *French* (B1), *Spanish* (A2)

@@ -1,4 +1,4 @@
-# LaTeX CV
+# CV
 
 A clean, professional CV created with Typst and [basic-resume template](https://typst.app/universe/package/basic-resume).
 
