@@ -67,7 +67,7 @@
 #work(
   title: "Research Intern",
   location: "Copenhagen, DK",
-  company: "IT University of Copenhagen",
+  company: "NERDS Group @ IT University of Copenhagen",
   dates: dates-helper(start-date: "Sep 2025", end-date: "Dec 2025"),
 )
 - Analyzed large-scale networks to identify echo chambers and their dynamics
