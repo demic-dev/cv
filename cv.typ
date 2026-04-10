@@ -136,4 +136,4 @@
 == Skills
 - *Technologies*: Git, Docker, Linux
 - *Programming Languages*: Typescript, Python, Nix, Go, Rust, SQL, Bash scripting
-- *Spoken Languages*: *Italian* (native), *English* (C1), *French* (B1), *Spanish* (A2)
+- *Spoken Languages*: *Italian* (native), *English* (Cambridge C1 Advanced), *French* (B1), *Spanish* (A2)
