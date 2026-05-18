@@ -2,12 +2,12 @@
 
 // Put your personal information here, replacing mine
 #let name = "Michele De Cillis"
-#let location = "Milan, IT"
+#let location = "Milan, IT (open to relocation)"
 #let email = "work@demic.dev"
 #let github = "github.com/demic-dev"
 #let linkedin = "linkedin.com/in/michele-decillis"
 // #let phone = "+1 (xxx) xxx-xxxx"
-#let personal-site = "demic.dev"
+// #let personal-site = "demic.dev"
 
 #show: resume.with(
   author: name,
@@ -19,12 +19,12 @@
   github: github,
   linkedin: linkedin,
   // phone: phone,
-  personal-site: personal-site,
+  // personal-site: personal-site,
   accent-color: "#26428b",
   font: "New Computer Modern",
   paper: "a4",
-  author-position: left,
-  personal-info-position: left,
+  author-position: center,
+  personal-info-position: center,
 )
 
 /*
@@ -120,7 +120,9 @@
   activity: "Open Source Contributor",
   dates: "present",
 )
-- #link("https://github.com/pixelfed/pixelfed-rn/pulls?q=author%3Ademic-dev")[Contributed] with bug fixes to an open-source federated social media platform
+- #link("https://github.com/pixelfed/pixelfed-rn/pulls?q=author%3Ademic-dev")[Contributed] with bug fixes to `Pixelfed`, an open-source federated social media platform
+- #link("https://github.com/TryGhost/Themes/pull/506#event-25584039684")[Contributed] with translations to `Ghost`, an open-source blogging platform
+- #link("https://github.com/NixOS/nixpkgs/pulls?q=is%3Apr%20author%3Ademic-dev%20")[Contributed] to `nixpkgs` with new packages and documentation
 // - Minor contributions in Nix Flakes and NixPkgs
 
 == Projects
@@ -136,4 +138,4 @@
 == Skills
 - *Technologies*: Git, Docker, Linux
 - *Programming Languages*: Typescript, Python, Nix, Go, Rust, SQL, Bash scripting
-- *Spoken Languages*: *Italian* (native), *English* (Cambridge C1 Advanced), *French* (B1), *Spanish* (A2)
+- *Spoken Languages*: *Italian* (native), *English* (Cambridge C1 Advanced), *French* (B1), *Spanish* (B1)
