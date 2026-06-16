@@ -39,28 +39,6 @@
  * #generic-two-by-two(top-left: "", top-right: "", bottom-left: "", bottom-right: "")
  * #generic-one-by-two(left: "", right: "")
  */
-== Education
-
-#edu(
-  institution: "Università degli Studi di Milano",
-  location: "Milan, IT",
-  dates: dates-helper(start-date: "Sep 2022", end-date: "Apr 2026"),
-  degree: "Bachelor's of Science, Computer Science",
-  consistent: true,
-)
-- Ranked in the top 25% of students faculty-wide
-- Relevant Coursework: Data Structures, Algebra, Calculus, Physics, Programming
-
-#edu(
-  institution: "Université Paris-Saclay",
-  location: "Paris, FR",
-  dates: dates-helper(start-date: "Sep 2023", end-date: "June 2024"),
-  degree: "Erasmus+ Exchange",
-  consistent: true,
-)
-- Relevant Coursework: Linear Programming, Machine Learning, Natural Language Processing, Bioinformatics
-- Mastered all courses in French (a new language for me), ranking in the top 15% for half
-- Developed cross-cultural collaboration skills in multinational academic teams
 
 == Work Experience
 
@@ -101,29 +79,47 @@
 - Designed and built progressive web applications and mobile solutions for SMEs
 - Automated deployment pipeline, reducing publishing time from 45 to 10 minutes
 
+
+== Education
+
+#edu(
+  institution: "Università degli Studi di Milano",
+  location: "Milan, IT",
+  dates: dates-helper(start-date: "Sep 2022", end-date: "Apr 2026"),
+  degree: "Bachelor's of Science, Computer Science",
+  consistent: true,
+)
+- Ranked in the top 25% of students faculty-wide.
+- Relevant Coursework: Data Structures, Algebra, Calculus, Physics, Programming
+
+#edu(
+  institution: "Université Paris-Saclay",
+  location: "Paris, FR",
+  dates: dates-helper(start-date: "Sep 2023", end-date: "June 2024"),
+  degree: "Erasmus+ Exchange",
+  consistent: true,
+)
+- Relevant Coursework: Linear Programming, Machine Learning, Natural Language Processing, Bioinformatics
+- Mastered all courses in French (a new language for me), ranking in the top 15% for half
+
 == Extracurricular Activities
 
 #extracurriculars(
   activity: "Silicon Valley Study Tour",
   dates: "Aug 2025",
 )
-- Visited top tech companies and universities in Silicon Valley, hosted by industry experts
+- Visited leading technology companies and research institutions in Silicon Valley hosted by industry experts; gained insights into enterprise AI and decision-making systems at scale
 
 #extracurriculars(
   activity: "Won University Startup Challenge",
   dates: "May 2025",
 )
-- Won a hackathon among all universities in Milan, competing against 400 participants
-- Awarded incubation of Polyneta at Fondazione UNIMI
+- Won a hackathon among all Milan universities, competing against 400 participants. Awarded with startup incubation
 
 #extracurriculars(
   activity: "Open Source Contributor",
-  dates: "present",
 )
-- #link("https://github.com/pixelfed/pixelfed-rn/pulls?q=author%3Ademic-dev")[Contributed] with bug fixes to `Pixelfed`, an open-source federated social media platform
-- #link("https://github.com/TryGhost/Themes/pull/506#event-25584039684")[Contributed] with translations to `Ghost`, an open-source blogging platform
-- #link("https://github.com/NixOS/nixpkgs/pulls?q=is%3Apr%20author%3Ademic-dev%20")[Contributed] to `nixpkgs` with new packages and documentation
-// - Minor contributions in Nix Flakes and NixPkgs
+- Various contributions to different open source projects, from bug fixes to new features (#link("https://github.com/pixelfed/pixelfed-rn/pulls?q=author%3Ademic-dev")[Pixelfed], #link("https://github.com/TryGhost/Themes/pull/506#event-25584039684")[Ghost], #link("https://github.com/NixOS/nixpkgs/pulls?q=is%3Apr%20author%3Ademic-dev%20")[nixpkgs])
 
 == Projects
 
@@ -136,6 +132,5 @@
 - Implemented statistical methods to identify differentially expressed genes that could serve as potential biomarkers
 
 == Skills
-- *Technologies*: Git, Docker, Linux
-- *Programming Languages*: Typescript, Python, Nix, Go, Rust, SQL, Bash scripting
-- *Spoken Languages*: *Italian* (native), *English* (Cambridge C1 Advanced), *French* (B1), *Spanish* (B1)
+- *Languages & Tools*: Python, SQL, Typescript, Go, Rust, Bash scripting, Nix, Git, Docker, Linux
+- *Spoken Languages*: *Italian* (native), *English* (Cambridge C1 Advanced), *Spanish* (B1), *French* (B1)
