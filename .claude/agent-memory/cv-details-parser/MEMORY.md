@@ -1,0 +1,3 @@
+- [Resume file & schema](resume-schema.md) — resume.yaml is JSON-Resume schema in YAML, rendered by cv.typ (altacv)
+- [Markup conventions](markup-conventions.md) — free-text fields render via Typst eval; use *bold* / _italic_ / `code`, NOT markdown **
+- [Confirmed facts & anonymization](confirmed-facts.md) — brand names are anonymized in details.md; details.md is source of truth
