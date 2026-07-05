@@ -80,6 +80,55 @@
               runHook postInstall
             '';
           };
+
+          job-hunt-specific = pkgs.stdenvNoCC.mkDerivation {
+            pname = "cv-job-hunt-specific";
+            version = "0.1.0";
+
+            # job-hunt/ is .gitignore'd, so it's absent from the git-filtered source. 
+            # requires: `nix build --impure`
+            src = builtins.path {
+              path = ./job-hunt;
+              name = "job-hunt-src";
+            };
+
+            nativeBuildInputs = [ pkgs.typst ];
+            TYPST_FONT_PATHS = "${pkgs.font-awesome}/share/fonts:${pkgs.lato}/share/fonts";
+
+            buildPhase = ''
+              runHook preBuild
+
+              export HOME="$TMPDIR"
+              mkdir -p "$HOME/.cache/typst"
+              ln -s ${typstPackageCache} "$HOME/.cache/typst/packages"
+
+              for dir in */; do
+                [[ ! -d "$dir" ]] && continue
+
+                if [[ -f "$dir/cv.typ" ]]; then
+                  typst compile "$dir/cv.typ" "$dir/cv.pdf"
+                fi
+
+                if [[ -f "$dir/cover-letter.typ" ]]; then
+                  typst compile "$dir/cover-letter.typ" "$dir/cover-letter.pdf" --root .
+                fi
+              done
+
+              runHook postBuild
+            '';
+
+            installPhase = ''
+              runHook preInstall
+              for dir in */; do
+                [[ ! -d "$dir" ]] && continue
+                name="$(basename "$dir")"
+                mkdir -p "$out/$name"
+                [[ -f "$dir/cv.pdf" ]] && cp "$dir/cv.pdf" "$out/$name/"
+                [[ -f "$dir/cover-letter.pdf" ]] && cp "$dir/cover-letter.pdf" "$out/$name/"
+              done
+              runHook postInstall
+            '';
+          };
         });
 
       devShells = forAllSystems (system:
