@@ -44,7 +44,7 @@ pkgs.mkShell {
         fi
     done
 
-    if [[ ! -f "*_cv.pdf" ]] || [[ "cv.typ" -nt "*_cv.pdf" ]]; then
+    if [[ ! -f "*_cv.pdf" ]] || [[ "resume.yaml" -nt "*_cv.pdf" ]]; then
         echo "Compiling main CV at cv.typ..."
         typst compile "cv.typ" "michele-de-cillis_cv.pdf"
         if [[ $? -eq 0 ]]; then
@@ -59,6 +59,42 @@ pkgs.mkShell {
             echo "✗ Failed: $dir/cv.typ"
         fi
     fi
+
+    # Compile each role-tailored variant in variants/ into its own
+    # {variant}_cv.pdf and ATS-ready {variant}_cv-ATSREADY.pdf, feeding the
+    # variant's yaml path to cv.typ via the fileName input.
+    for variant in variants/*.yaml; do
+        # Skip if the glob didn't match anything
+        [[ ! -f "$variant" ]] && continue
+
+        # Skip variants the agent hasn't filled in yet (empty files)
+        if [[ ! -s "$variant" ]]; then
+            echo "⊘ Skipped: $variant (empty, not yet generated)"
+            continue
+        fi
+
+        name="$(basename "$variant" .yaml)"
+
+        # Recompile only if a PDF is missing or the variant yaml is newer
+        if [[ ! -f "variants/''${name}_cv.pdf" ]] || [[ "$variant" -nt "variants/''${name}_cv.pdf" ]]; then
+            echo "Compiling variant: $variant"
+            typst compile "cv.typ" "variants/''${name}_cv.pdf" --input fileName="$variant"
+            if [[ $? -eq 0 ]]; then
+                echo "✓ Generated: variants/''${name}_cv.pdf"
+            else
+                echo "✗ Failed: $variant"
+            fi
+
+            typst compile "cv.typ" "variants/''${name}_cv-ATSREADY.pdf" --input fileName="$variant" --input columnRatio=1
+            if [[ $? -eq 0 ]]; then
+                echo "✓ Generated: variants/''${name}_cv-ATSREADY.pdf"
+            else
+                echo "✗ Failed: $variant (ATS)"
+            fi
+        else
+            echo "⊘ Skipped: $variant (PDFs are up-to-date)"
+        fi
+    done
 
     echo "Done!"
     exit 0

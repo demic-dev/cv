@@ -63,6 +63,12 @@
   0.649
 }
 
+#let fileName = if "fileName" in sys.inputs {
+  sys.inputs.at("fileName")
+} else {
+  "resume.yaml"
+}
+
 // The custom section layout is meaningful only for the single-column
 // layout (columnRatio == 1, where altacv concatenates left + right in
 // order). In two-column mode, fall back to altacv's default placement.
@@ -88,7 +94,7 @@
 } else { (:) }
 
 #alta-from-yaml(
-  "resume.yaml",
+  fileName,
   labels: (awards: "Accomplishments"),
   preferences: (
     columnRatio: columnRatio,

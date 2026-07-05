@@ -1,0 +1,238 @@
+basics:
+  name: Michele De Cillis
+  label: Data Analyst
+  image: ""
+  email: work@demic.dev
+  # summary: >-
+  #   Computer Science graduate who analyzes data to produce insight: measured
+  #   polarization across large-scale social networks and empirically validated
+  #   the results against theoretical models, and built a model that generalizes
+  #   with 90% accuracy on RNA-Seq data to identify potential biomarkers. Works
+  #   in Python (NumPy, Pandas, scikit-learn, Matplotlib) and runs structured
+  #   customer discovery and market research.
+  location:
+    countryCode: IT
+    region: Milan
+  profiles:
+    - network: GitHub
+      username: demic-dev
+      url: https://github.com/demic-dev
+    - network: LinkedIn
+      username: demic-dev
+      url: https://linkedin.com/in/michele-decillis
+    - network: Website
+      username: demic.dev
+      url: https://demic.dev
+
+work:
+  - name: NERDS Lab @ ITU
+    position: Research Intern
+    url: https://nerds.itu.dk/
+    location: Copenhagen, DK
+    startDate: "2025-09"
+    endDate: "2025-12"
+    summary: >-
+      Conducted bachelor's thesis research on measuring polarization in
+      large-scale directed social networks during an Erasmus traineeship,
+      including a literature review across social media analysis, network
+      polarization, and network science. Stack: Python, NumPy, PyTorch, Pandas.
+    highlights:
+      - >-
+        Measured and analyzed polarization across directed networks by applying
+        the Magnetic Laplacian — the *first use in this context*
+      - >-
+        Statistically validated results against theoretical toy-network models,
+        reaching a *0.65 average correlation*
+      - >-
+        Prepared and processed the *entire historical Reddit dataset* on HPC
+        infrastructure, adapting the pipeline to build directed instead of
+        undirected networks
+      - >-
+        Earned the *highest thesis grade (7/7)*. Read #link("https://raw.githubusercontent.com/demic-dev/bsc-thesis/refs/heads/main/thesis.pdf")[here]
+
+  - name: Polyneta
+    position: Co-founder
+    url: https://polyneta.netlify.app/
+    location: Remote
+    startDate: "2025-04"
+    endDate: "2025-12"
+    summary: >-
+      Co-founded a startup connecting companies that sell to municipalities to
+      simplify direct-award procurement, running customer discovery and building
+      the early product with AI-accelerated development.
+    highlights:
+      - >-
+        Ran customer discovery through *3-5 exploratory interviews* and Mom Test
+        surveys
+      - >-
+        Pitched at the FondazioneUniMi incubator, backed by extensive market
+        research
+      - >-
+        Prototyped a scraping, RAG, and OCR pipeline to extract structured data
+        from disorganized public-sector PDFs
+
+  - name: Pane&Design (PED, part of humanvsmachine.co)
+    position: Front-End Engineer
+    url: https://humanvsmachine.co/
+    location: Milan, IT
+    startDate: "2021-10"
+    endDate: "2022-12"
+    summary: >-
+      Built and optimized high-traffic e-commerce sites and internal
+      telemedicine tools for a Fortune 500 client at a digital consulting
+      agency, using React, TypeScript, styled-components, Tailwind, and
+      Material UI.
+    highlights:
+      - >-
+        Unified a multi-section medical history form into a single-page
+        data-entry flow for the client's ophthalmologists, using
+        react-jsonschema-form
+      - >-
+        Cut re-renders and load times by *perceived 50%* on a high-traffic
+        e-commerce site (*~100k monthly visits*) via microservices with dynamic
+        JS loading
+
+  - name: Online Impresa (part of areaweb.org)
+    position: Full-Stack Engineer
+    url: https://areaweb.org/
+    location: Bari, IT
+    startDate: "2020-07"
+    endDate: "2021-09"
+    summary: >-
+      Sole developer at a small software agency serving SMEs, building the
+      company's flagship mobile app platform from scratch with TypeScript,
+      React Native, GraphQL, and Expo, and working directly with clients on
+      requirements.
+    highlights:
+      - >-
+        Built internal reporting tools, including a live office dashboard
+        showing the *daily count of closed orders*, fed by a WhatsApp bot
+        posting every closed order
+      - >-
+        Delivered *~100 client apps*, gathering and implementing requirements
+        directly with clients
+
+projects:
+  - name: ALS Biomarker Identification
+    startDate: "2024-05"
+    endDate: "2024-05"
+    description: >-
+      Analyzed RNA-Seq data and developed a model that generalizes with
+      _90% accuracy_ for the ALS group. Authored comprehensive documentation of
+      a workflow to identify potential biomarkers.
+    url: https://github.com/demic-dev/als-biomarker-identification-project
+
+  - name: Open Source Contributions
+    startDate: "2025"
+    highlights:
+      - >-
+        Usability bugfixes (mainly state sync) in #link("https://github.com/pixelfed/pixelfed-rn/pulls?q=author%3Ademic-dev")[Pixelfed] (*+7k stars*, React Native)
+      - >-
+        Improved the Italian translation in #link("https://github.com/TryGhost/Themes/pulls?q=is%3Apr%20author%3Ademic-dev%20")[Ghost Blog] (*+54k stars*)
+      - >-
+        Ported and maintaining a package in #link("https://github.com/NixOS/nixpkgs/pulls?q=is%3Apr%20author%3Ademic-dev%20")[nixpkgs] (*+25k stars*, Nix language)
+    url: https://github.com/search?q=is%3Apr%20author%3Ademic-dev%20-owner%3Ademic-dev&type=pullrequests&s=created&o=desc
+
+  - name: Personal Homelab
+    startDate: "2025-03"
+    description: >-
+      Self-host personal services (Nextcloud, Immich, and more) on a VPS with
+      `NixOS`, using reproducible configuration-as-code to add services and
+      their infrastructure (backups, nginx) quickly, with the same config shared
+      across devices. Uses Tailscale for VPN, nginx as a reverse proxy, and
+      daily BorgBase backups.
+    url: https://github.com/demic-dev/configurations
+
+awards:
+  - title: Top-Percentile Academic Ranking
+    date: "2024/25"
+    awarder: University of Milan
+    summary: >-
+      Ranked in the top
+      #link("https://www.unimi.it/sites/default/files/2025-07/ALLEGATO%202%20al%20Bando%20per%20il%20conferimento%20delle%20Borse%20di%20Ateneo%20a.a.%202025-26.pdf")[20%]
+      for academic performance and the top
+      #link("https://work.unimi.it/appelli/laureati-voto-2025.pdf")[15%]
+      for graduation grade within the reference academic year.
+
+  - title: First Place
+    date: "2025"
+    awarder: University Startup Challenge
+    summary: >-
+      Won first place as a team of 4 by conducting market research, gathering
+      early feedback, and building the pitch, landing page, and Figma prototype
+      for what became Polyneta.
+
+  - title: Silicon Valley Study Tour
+    date: "2025-08"
+    summary: >-
+      Selected for a competitive program visiting leading companies and
+      universities (Cisco, Apple, Google, LinkedIn, Electronic Arts,
+      PureStorage, Sysdig, Zoox, Stanford, Berkeley), attending keynotes from
+      their teams and building connections.
+
+education:
+  - institution: Università degli Studi di Milano
+    url: https://www.unimi.it/en
+    studyType: BSc Computer Science
+    startDate: "2022-09"
+    endDate: "2026-04"
+    courses:
+      - Calculus
+      - Linear Algebra
+      - Physics
+      - Data Structures and Algorithms
+
+  - institution: Université Paris-Saclay
+    url: https://www.universite-paris-saclay.fr/en
+    studyType: Erasmus+ Exchange Program
+    startDate: "2023-09"
+    endDate: "2024-06"
+    courses:
+      - Bio Informatics
+      - Machine Learning & NLP
+      - Linear Programming
+
+skills:
+  - name: Language and Tools
+    keywords:
+      - Python
+      - PostgreSQL
+      - Git
+      - Figma
+      - Bash
+      - Linux
+      - Nix
+      - Docker
+      - TypeScript
+      - JavaScript
+      - GraphQL
+      - HTML/CSS
+      - Typst
+      - LaTeX
+  - name: Frameworks and Libraries
+    keywords:
+      - NumPy
+      - Pandas
+      - scikit-learn
+      - Matplotlib
+      - DuckDB
+      - PyTorch
+      - Node.js
+      - React
+      - React Native
+      - TanStack Query
+
+languages:
+  - language: Italian
+    fluency: Native speaker
+  - language: English
+    fluency: C1 Advanced
+  - language: French
+    fluency: B1
+  - language: Spanish
+    fluency: B1
+
+certificates:
+  - name: Cambridge C1 Advanced
+    date: "2026-03-26"
+    issuer: Cambridge Assessment English
