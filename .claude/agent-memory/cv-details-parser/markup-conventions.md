@@ -5,7 +5,7 @@ metadata:
   type: feedback
 ---
 
-In `resume.yaml`, the free-text fields — `basics.summary`, `work.summary`, `work.highlights`,
+In `generic.yaml`, the free-text fields — `basics.summary`, `work.summary`, `work.highlights`,
 `projects.description`, `projects.highlights` (and volunteer/awards/publications/references) — are
 run through Typst `eval(mode: "markup")` by `cv.typ`. All other fields (names, dates, urls) pass
 through literally.

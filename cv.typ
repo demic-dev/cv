@@ -66,7 +66,7 @@
 #let fileName = if "fileName" in sys.inputs {
   sys.inputs.at("fileName")
 } else {
-  "resume.yaml"
+  "generic.yaml"
 }
 
 // The custom section layout is meaningful only for the single-column
