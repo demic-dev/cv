@@ -32,20 +32,14 @@ work:
     startDate: "2025-09"
     endDate: "2025-12"
     summary: >-
-      Conducted bachelor's thesis research on measuring polarization in
-      large-scale directed social networks during an Erasmus traineeship,
-      including a literature review across social media analysis, network
-      polarization, and network science. Stack: Python, NumPy, PyTorch, Pandas.
+      Conducted bachelor's thesis research on measuring polarization in large-scale directed social networks during an Erasmus traineeship, including a literature review across social media analysis, network polarization, and network science. Stack: Python, NumPy, PyTorch, Pandas.
     highlights:
       - >-
-        Measured polarization on directed networks by applying the Magnetic
-        Laplacian — the *first use in this context*
+        Measured polarization on directed networks by applying the Magnetic Laplacian — the *first use in this context*
       - >-
-        Adapted an HPC pipeline over the *entire historical Reddit dataset* to
-        build directed instead of undirected networks
+        Adapted an HPC pipeline over the *entire historical Reddit dataset* to build directed instead of undirected networks
       - >-
-        Validated results against theoretical toy-network models, reaching a
-        *0.65 average correlation*
+        Validated results against theoretical toy-network models, reaching a *0.65 average correlation*
       - >-
         Earned the *highest thesis grade (7/7)*. Read #link("https://raw.githubusercontent.com/demic-dev/bsc-thesis/refs/heads/main/thesis.pdf")[here]
 
@@ -56,22 +50,16 @@ work:
     startDate: "2025-04"
     endDate: "2025-12"
     summary: >-
-      Co-founded a startup connecting companies that sell to municipalities to
-      simplify direct-award procurement, running customer discovery and building
-      the early product with AI-accelerated development.
+      Co-founded a startup connecting companies that sell to municipalities to simplify direct-award procurement, running customer discovery and building the early product with AI-accelerated development.
     highlights:
       - >-
-        Built the alpha (pre-MVP) aggregating company services for
-        municipalities, using AI to accelerate development
+        Built the alpha (pre-MVP) aggregating company services for municipalities, using AI to accelerate development
       - >-
-        Prototyped a scraping, RAG, and OCR pipeline to extract structured data
-        from disorganized public-sector PDFs
+        Prototyped a scraping, RAG, and OCR pipeline to extract structured data from disorganized public-sector PDFs
       - >-
-        Ran customer discovery through *3-5 exploratory interviews* and Mom Test
-        surveys
+        Ran customer discovery through *3-5 exploratory interviews* and Mom Test surveys
       - >-
-        Pitched at the FondazioneUniMi incubator, backed by extensive market
-        research
+        Pitched at the FondazioneUniMi incubator, backed by extensive market research
 
   - name: Pane&Design (PED, part of humanvsmachine.co)
     position: Front-End Engineer
@@ -80,24 +68,16 @@ work:
     startDate: "2021-10"
     endDate: "2022-12"
     summary: >-
-      Built and optimized high-traffic e-commerce sites and internal
-      telemedicine tools for a Fortune 500 client at a digital consulting
-      agency, using React, TypeScript, styled-components, Tailwind, and
-      Material UI.
+      Built and optimized high-traffic e-commerce sites and internal telemedicine tools for a Fortune 500 client at a digital consulting agency, using React, TypeScript, styled-components, Tailwind, and Material UI.
     highlights:
       - >-
-        Cut re-renders and load times by *perceived 50%* on a high-traffic
-        e-commerce site (*~100k monthly visits*) via microservices with dynamic
-        JS loading
+        Cut re-renders and load times by *perceived 50%* on a high-traffic e-commerce site (*~100k monthly visits*) via microservices with dynamic JS loading
       - >-
-        Built a telemedicine tool for the client's ophthalmologists, unifying a
-        multi-section medical history form into a single-page flow with
-        react-jsonschema-form
+        Built a telemedicine tool for the client's ophthalmologists, unifying a multi-section medical history form into a single-page flow with react-jsonschema-form
       - >-
         Managed one developer through task assignment and code review
       - >-
-        Contributed to further high-traffic client sites (*up to ~200k monthly
-        visits*) and to the agency's own website
+        Contributed to further high-traffic client sites (*up to ~200k monthly visits*) and to the agency's own website
 
   - name: Online Impresa (part of areaweb.org)
     position: Full-Stack Engineer
@@ -106,24 +86,16 @@ work:
     startDate: "2020-07"
     endDate: "2021-09"
     summary: >-
-      Sole developer at a small software agency serving SMEs, building the
-      company's flagship mobile app platform from scratch with TypeScript,
-      React Native, GraphQL, and Expo, and working directly with clients on
-      requirements.
+      Sole developer at a small software agency serving SMEs, building the company's flagship mobile app platform from scratch with TypeScript, React Native, GraphQL, and Expo, and working directly with clients on requirements.
     highlights:
       - >-
-        Cut app deployment *from ~1 hour to ~15 minutes* by building a tool that
-        clones the template repo, loads client specs, and builds with Expo
+        Cut app deployment *from ~1 hour to ~15 minutes* by building a tool that clones the template repo, loads client specs, and builds with Expo
       - >-
-        Built the company's flagship app from scratch as sole developer with
-        TypeScript, React Native, GraphQL, and Expo; shipped to the Play Store
-        and App Store
+        Built the company's flagship app from scratch as sole developer with TypeScript, React Native, GraphQL, and Expo; shipped to the Play Store and App Store
       - >-
-        Delivered *~100 client apps*, gathering and implementing requirements
-        directly with clients
+        Delivered *~100 client apps*, gathering and implementing requirements directly with clients
       - >-
-        Built internal tools, including a WhatsApp bot posting every closed
-        order to a live office dashboard
+        Built internal tools, including a WhatsApp bot posting every closed order to a live office dashboard
 
 projects:
   - name: Open Source Contributions
@@ -140,20 +112,14 @@ projects:
   - name: Personal Homelab
     startDate: "2025-03"
     description: >-
-      Self-host personal services (Nextcloud, Immich, and more) on a VPS with
-      `NixOS`, using reproducible configuration-as-code to add services and
-      their infrastructure (backups, nginx) quickly, with the same config shared
-      across devices. Uses Tailscale for VPN, nginx as a reverse proxy, and
-      daily BorgBase backups.
+      Self-host personal services (Nextcloud, Immich, and more) on a VPS with `NixOS`, using reproducible configuration-as-code to add services and their infrastructure (backups, nginx) quickly, with the same config shared across devices. Uses Tailscale for VPN, nginx as a reverse proxy, and daily BorgBase backups.
     url: https://github.com/demic-dev/configurations
 
   - name: ALS Biomarker Identification
     startDate: "2024-05"
     endDate: "2024-05"
     description: >-
-      Analyzed RNA-Seq data and developed a model that generalizes with
-      _90% accuracy_ for the ALS group. Authored comprehensive documentation of
-      a workflow to identify potential biomarkers.
+      Analyzed RNA-Seq data and developed a model that generalizes with _90% accuracy_ for the ALS group. Authored comprehensive documentation of a workflow to identify potential biomarkers.
     url: https://github.com/demic-dev/als-biomarker-identification-project
 
 awards:
@@ -161,27 +127,18 @@ awards:
     date: "2024/25"
     awarder: University of Milan
     summary: >-
-      Ranked in the top
-      #link("https://www.unimi.it/sites/default/files/2025-07/ALLEGATO%202%20al%20Bando%20per%20il%20conferimento%20delle%20Borse%20di%20Ateneo%20a.a.%202025-26.pdf")[20%]
-      for academic performance and the top
-      #link("https://work.unimi.it/appelli/laureati-voto-2025.pdf")[15%]
-      for graduation grade within the reference academic year.
+      Ranked in the top #link("https://www.unimi.it/sites/default/files/2025-07/ALLEGATO%202%20al%20Bando%20per%20il%20conferimento%20delle%20Borse%20di%20Ateneo%20a.a.%202025-26.pdf")[20%] for academic performance and the top link("https://work.unimi.it/appelli/laureati-voto-2025.pdf")[15%] for graduation grade within the reference academic year.
 
   - title: First Place
     date: "2025"
     awarder: University Startup Challenge
     summary: >-
-      Won first place as a team of 4 by conducting market research, gathering
-      early feedback, and building the pitch, landing page, and Figma prototype
-      for what became Polyneta.
+      Won first place as a team of 4 by conducting market research, gathering early feedback, and building the pitch, landing page, and Figma prototype for what became Polyneta.
 
   - title: Silicon Valley Study Tour
     date: "2025-08"
     summary: >-
-      Selected for a competitive program visiting leading companies and
-      universities (Cisco, Apple, Google, LinkedIn, Electronic Arts,
-      PureStorage, Sysdig, Zoox, Stanford, Berkeley), attending keynotes from
-      their teams and building connections.
+      Selected for a competitive program visiting leading companies and universities (Cisco, Apple, Google, LinkedIn, Electronic Arts, PureStorage, Sysdig, Zoox, Stanford, Berkeley), attending keynotes from their teams and building connections.
 
 education:
   - institution: Università degli Studi di Milano
