@@ -120,10 +120,53 @@
       devShells = forAllSystems (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+
+          # `watch [file.yaml]` — recompile on save and preview in zathura.
+          # A script rather than a shellHook function, because .envrc loads
+          # this shell through direnv: a shellHook runs in bash and its
+          # functions never reach an interactive fish.
+          watch = pkgs.writeShellScriptBin "watch" ''
+            set -euo pipefail
+
+            file="''${1:-generic.yaml}"
+            pdf=temp.pdf
+
+            if [ ! -f cv.typ ]; then
+              echo "watch: no cv.typ here, run this from the repo root" >&2
+              exit 1
+            fi
+            if [ ! -f "$file" ]; then
+              echo "watch: no such file: $file" >&2
+              exit 1
+            fi
+            if ! command -v zathura >/dev/null; then
+              echo "watch: zathura is not on PATH" >&2
+              exit 1
+            fi
+
+            typst watch cv.typ "$pdf" --input fileName="$file" &
+            typst=$!
+            trap 'kill $typst 2>/dev/null || true; rm -f "$pdf"' EXIT INT TERM
+
+            # zathura exits if the file is not there yet, so wait for the
+            # first compile. It reloads on its own afterwards.
+            while [ ! -s "$pdf" ]; do
+              if ! kill -0 $typst 2>/dev/null; then
+                echo "watch: typst exited before writing $pdf" >&2
+                exit 1
+              fi
+              sleep 0.1
+            done
+
+            # Foreground on purpose: closing zathura has to end the script so
+            # the trap can stop typst and delete the PDF. `& disown` would put
+            # it out of reach.
+            zathura "$pdf"
+          '';
         in
         {
           default = pkgs.mkShell {
-            packages = [ pkgs.typst ];
+            packages = [ pkgs.typst watch ];
             TYPST_FONT_PATHS = "${pkgs.font-awesome}/share/fonts:${pkgs.lato}/share/fonts";
           };
         });
