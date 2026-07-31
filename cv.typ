@@ -1,4 +1,4 @@
-#import "template.typ": jake
+#import "templates/cv.typ": jake
 
 // --- YAML injection -------------------------------------------------------
 //
@@ -59,7 +59,7 @@
 #let fileName = if "fileName" in sys.inputs {
   sys.inputs.at("fileName")
 } else {
-  "generic.yaml"
+  "inputs/info.yaml"
 }
 
 #jake-from-yaml(

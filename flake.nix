@@ -84,13 +84,24 @@
               export HOME="$TMPDIR"
               mkdir -p "$HOME/.cache/typst"
 
+              # A letter with no `date` falls back to typst's today, which reads SOURCE_DATE_EPOCH: stdenv pins that to 1980 for reproducible builds. This derivation is impure already, so prefer a correct date over a stable one.
+              export SOURCE_DATE_EPOCH="$(date +%s)"
+
               cp -r ${companiesSrc} companies
               chmod -R u+w companies
 
+              # A company directory holds a CV (info.yaml), a cover letter
+              # (letter.yaml), or both; each is compiled when it is there.
               for dir in companies/*/; do
                 dir="''${dir%/}"
-                [ -f "$dir/info.yaml" ] || continue
-                typst compile cv.typ "$dir/cv.pdf" --input fileName="$dir/info.yaml"
+
+                if [ -f "$dir/info.yaml" ]; then
+                  typst compile cv.typ "$dir/cv.pdf" --input fileName="$dir/info.yaml"
+                fi
+
+                if [ -f "$dir/letter.yaml" ]; then
+                  typst compile cover-letter.typ "$dir/cover-letter.pdf" --input fileName="$dir/letter.yaml"
+                fi
               done
 
               runHook postBuild
@@ -100,11 +111,11 @@
               runHook preInstall
               mkdir -p $out/companies
 
-              for pdf in companies/*/cv.pdf; do
+              for pdf in companies/*/cv.pdf companies/*/cover-letter.pdf; do
                 [ -e "$pdf" ] || continue
                 name="$(basename "$(dirname "$pdf")")"
                 mkdir -p "$out/companies/$name"
-                cp "$pdf" "$out/companies/$name/michele-decillis_cv.pdf"
+                cp "$pdf" "$out/companies/$name/michele-decillis_$(basename "$pdf")"
               done
               runHook postInstall
             '';
@@ -121,30 +132,36 @@
         let
           pkgs = nixpkgs.legacyPackages.${system};
 
-          # `watch [file.yaml]` — recompile on save and preview in zathura.
-          # A script rather than a shellHook function, because .envrc loads
-          # this shell through direnv: a shellHook runs in bash and its
-          # functions never reach an interactive fish.
-          watch = pkgs.writeShellScriptBin "watch" ''
+          # A script rather than a shellHook function, because .envrc loads this shell through direnv: a shellHook runs in bash and its functions never reach an interactive fish.
+          mkWatch = { name, entry, default ? null }: pkgs.writeShellScriptBin name ''
             set -euo pipefail
 
-            file="''${1:-generic.yaml}"
-            pdf=temp.pdf
+            # Same as in the build: the nix shell pins this to 1980, and a letter without a `date` would preview with that.
+            export SOURCE_DATE_EPOCH="$(date +%s)"
 
-            if [ ! -f cv.typ ]; then
-              echo "watch: no cv.typ here, run this from the repo root" >&2
+            file="''${1:-${if default == null then "" else default}}"
+            # Named after the script, so a CV and a letter can be watched
+            # side by side without overwriting each other's preview.
+            pdf=temp-${name}.pdf
+
+            if [ ! -f ${entry} ]; then
+              echo "${name}: no ${entry} here, run this from the repo root" >&2
+              exit 1
+            fi
+            if [ -z "$file" ]; then
+              echo "${name}: which YAML? usage: ${name} <file>.yaml" >&2
               exit 1
             fi
             if [ ! -f "$file" ]; then
-              echo "watch: no such file: $file" >&2
+              echo "${name}: no such file: $file" >&2
               exit 1
             fi
             if ! command -v zathura >/dev/null; then
-              echo "watch: zathura is not on PATH" >&2
+              echo "${name}: zathura is not on PATH" >&2
               exit 1
             fi
 
-            typst watch cv.typ "$pdf" --input fileName="$file" &
+            typst watch ${entry} "$pdf" --input fileName="$file" &
             typst=$!
             trap 'kill $typst 2>/dev/null || true; rm -f "$pdf"' EXIT INT TERM
 
@@ -152,7 +169,7 @@
             # first compile. It reloads on its own afterwards.
             while [ ! -s "$pdf" ]; do
               if ! kill -0 $typst 2>/dev/null; then
-                echo "watch: typst exited before writing $pdf" >&2
+                echo "${name}: typst exited before writing $pdf" >&2
                 exit 1
               fi
               sleep 0.1
@@ -163,10 +180,22 @@
             # it out of reach.
             zathura "$pdf"
           '';
+
+          watch = mkWatch {
+            name = "watch";
+            entry = "cv.typ";
+            default = "inputs/info.yaml";
+          };
+
+          watch-letter = mkWatch {
+            name = "watch-letter";
+            entry = "cover-letter.typ";
+            default = "inputs/letter.yaml";
+          };
         in
         {
           default = pkgs.mkShell {
-            packages = [ pkgs.typst watch ];
+            packages = [ pkgs.typst watch watch-letter ];
             TYPST_FONT_PATHS = "${pkgs.font-awesome}/share/fonts:${pkgs.lato}/share/fonts";
           };
         });
