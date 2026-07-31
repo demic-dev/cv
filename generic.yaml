@@ -1,28 +1,22 @@
 basics:
   name: Michele De Cillis
-  label: Software Engineer
-  image: ""
+  # label: Software Engineer
+  phone: +39 3425 611 716
   email: work@demic.dev
   # summary: >-
-  #   Software engineer and Computer Science graduate with a deliberately
-  #   horizontal background spanning full-stack and front-end engineering at
-  #   software agencies, network-science research, and co-founding a startup.
-  #   Moves comfortably from React and React Native product work to research
-  #   pipelines, self-hosted infrastructure, and open source — and enjoys turning
-  #   user requirements into shipped products.
+  #   Software engineer and Computer Science graduate with a deliberately horizontal background spanning full-stack and front-end engineering at software agencies, network-science research, and co-founding a startup. Moves comfortably from React and React Native product work to research pipelines, self-hosted infrastructure, open source and enjoys turning user requirements into shipped products.
   location:
-    countryCode: IT
-    region: Milan
+    countryCode: Italy (open to relocation)
   profiles:
-    - network: GitHub
-      username: demic-dev
-      url: https://github.com/demic-dev
+    # - network: GitHub
+    #   username: demic-dev
+    #   url: https://github.com/demic-dev
     - network: LinkedIn
       username: michele-decillis
       url: https://linkedin.com/in/michele-decillis
-    - network: Website
-      username: demic.dev
-      url: https://demic.dev
+    # - network: Website
+    #   username: demic.dev
+    #   url: https://demic.dev
 
 work:
   - name: NERDS Lab @ ITU
@@ -35,7 +29,7 @@ work:
       Conducted bachelor's thesis research on measuring polarization in large-scale directed social networks during an Erasmus traineeship, including a literature review across social media analysis, network polarization, and network science. Stack: Python, NumPy, PyTorch, Pandas.
     highlights:
       - >-
-        Measured polarization on directed networks by applying the Magnetic Laplacian — the *first use in this context*
+        Measured polarization on directed networks by applying the Magnetic Laplacian, the *first use in this context*
       - >-
         Adapted an HPC pipeline over the *entire historical Reddit dataset* to build directed instead of undirected networks
       - >-
@@ -127,14 +121,12 @@ awards:
     date: "2024/25"
     awarder: University of Milan
     summary: >-
-      Ranked in the top #link("https://www.unimi.it/sites/default/files/2025-07/ALLEGATO%202%20al%20Bando%20per%20il%20conferimento%20delle%20Borse%20di%20Ateneo%20a.a.%202025-26.pdf")[20%] for academic performance and the top link("https://work.unimi.it/appelli/laureati-voto-2025.pdf")[15%] for graduation grade within the reference academic year.
-
+      Ranked in the top #link("https://www.unimi.it/sites/default/files/2025-07/ALLEGATO%202%20al%20Bando%20per%20il%20conferimento%20delle%20Borse%20di%20Ateneo%20a.a.%202025-26.pdf")[20%] for academic performance and the top #link("https://work.unimi.it/appelli/laureati-voto-2025.pdf")[15%] for graduation grade within the reference academic year.
   - title: First Place
     date: "2025"
     awarder: University Startup Challenge
     summary: >-
       Won first place as a team of 4 by conducting market research, gathering early feedback, and building the pitch, landing page, and Figma prototype for what became Polyneta.
-
   - title: Silicon Valley Study Tour
     date: "2025-08"
     summary: >-
@@ -204,4 +196,4 @@ languages:
 certificates:
   - name: Cambridge C1 Advanced
     date: "2026-03-26"
-    issuer: Cambridge Assessment English
+    issuer: Cambridge English Certification
