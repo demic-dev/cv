@@ -455,7 +455,7 @@
 // resolve it without depending on the host's font set. Kept a single
 // family on purpose: Typst warns once per unresolved name, so listing
 // fallbacks would put font warnings on every compile.
-#let sans = ("New Computer Modern", "Lato",)
+#let sans = ("Lato")
 
 // `cv` is a JSON-Resume dictionary — the same shape altacv's `alta` takes.
 // `sections` picks which keys are rendered and in what order; `labels`
