@@ -1,22 +1,21 @@
-#import "@preview/altacv:1.5.0": alta, palettes
+#import "template.typ": jake
 
 // --- YAML injection -------------------------------------------------------
 //
-// `alta-from-json` places string fields verbatim, so Typst markup written
-// in the data (e.g. `*bold*`, `_italic_`, `#link(...)`) shows up literally.
+// The template places string fields verbatim, so Typst markup written in the
+// data (e.g. `*bold*`, `_italic_`, `#link(...)`) would show up literally.
 // Reading from YAML and running the free-text fields through `eval(...,
-// mode: "markup")` instead makes that markup render, while every other
-// field (names, dates, urls) passes straight through to `alta`, which
-// already accepts raw JSON-Resume shapes.
+// mode: "markup")` instead makes that markup render, while every other field
+// (names, dates, urls) passes straight through to `jake`, which accepts raw
+// JSON-Resume shapes.
 //
-// The paths below are the free-text fields — same set altacv treats as
-// content. Each is a chain of keys leading to a string (or an array of
-// strings, for `highlights`); arrays met along the way are mapped over.
+// The paths below are the free-text fields. Each is a chain of keys leading
+// to a string (or an array of strings, for `highlights`); arrays met along
+// the way are mapped over.
 #let _content-paths = (
   ("basics", "summary"),
   ("work", "summary"),
   ("work", "highlights"),
-  ("focusAreas", "focusAreas"),
   ("projects", "description"),
   ("projects", "highlights"),
   ("volunteer", "summary"),
@@ -28,7 +27,7 @@
 
 // Free-text fields render their markup here. Links inside these fields
 // (bullets, descriptions, summaries) are underlined; header/section links
-// live outside this path and keep altacv's own styling.
+// live outside this path and keep the template's own styling.
 #let _eval-markup(value) = if type(value) == str {
   [#show link: underline
     #eval(value, mode: "markup")]
@@ -47,21 +46,15 @@
   value
 }
 
-#let alta-from-yaml(source, ..rest) = {
+#let jake-from-yaml(source, ..rest) = {
   let cv = _content-paths.fold(yaml(source), (data, path) => _eval-at(
     data,
     path,
   ))
-  alta(cv, ..rest)
+  jake(cv, ..rest)
 }
 
 // --------------------------------------------------------------------------
-
-#let columnRatio = if "columnRatio" in sys.inputs {
-  float(sys.inputs.at("columnRatio"))
-} else {
-  0.649
-}
 
 #let fileName = if "fileName" in sys.inputs {
   sys.inputs.at("fileName")
@@ -69,36 +62,16 @@
   "generic.yaml"
 }
 
-// The custom section layout is meaningful only for the single-column
-// layout (columnRatio == 1, where altacv concatenates left + right in
-// order). In two-column mode, fall back to altacv's default placement.
-#let columnSections = if columnRatio == 1 {
-  (
-    leftColumnSections: (
-      "work",
-      "projects",
-      "education",
-      "skills",
-      "awards",
-      "certificates",
-      "languages",
-    ),
-    rightColumnSections: (
-      "focusAreas",
-      "interests",
-      "volunteer",
-      "references",
-      "publications",
-    ),
-  )
-} else { (:) }
-
-#alta-from-yaml(
+#jake-from-yaml(
   fileName,
   labels: (awards: "Accomplishments"),
-  preferences: (
-    columnRatio: columnRatio,
-    accent: palettes.navy,
-    ..columnSections,
+  sections: (
+    "work",
+    "education",
+    "projects",
+    "skills",
+    "awards",
+    "languages",
+    "certificates",
   ),
 )
