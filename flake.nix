@@ -1,6 +1,6 @@
 {
   description = ''
-  My personal CV's flake, which generates, from its source, visually polished CV + its variants and its ATS-friendly version (1 column instead of 2).
+  My personal CV's flake, which generates, from its source, visually polished CV OR tailored for certain job listings.
   '';
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -9,39 +9,28 @@
     let
       forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
-      # cv.typ's transitive @preview package dependencies, pinned so the
-      # build can fetch them as fixed-output derivations (network allowed
-      # under sandboxing because the content hash is known upfront) instead
-      # of needing `typst compile` itself to reach the network.
-      typstPackages = [
-        { name = "altacv"; version = "1.5.0"; hash = "sha256-9mT79OTp47a0grwQeP2gUU9t3qVh1MB+TzOhSERpL+Q="; }
-        { name = "fontawesome"; version = "0.6.1"; hash = "sha256-tYw/l43OEamaMQoOYU5QxOOA9a1pS4ReiLmHbGa6JoM="; }
-        { name = "zebra"; version = "0.1.0"; hash = "sha256-qyK88R64meheKEg9bAuCtHOifNUqgG3BHrG35NJjAko="; }
-        { name = "gairm-import"; version = "0.8.1"; hash = "sha256-FGxwc/a7Jq29jjBvNtkuR7JcSkmJg9CULQ5IWSzzY/k="; }
-      ];
+      # companies/ is .gitignore'd, so it never reaches the flake's source: that source is a git-filtered copy in the store, and `./companies` resolves inside *that* copy, where the directory does not exist — `--impure` does not change this. The only way in is the real working directory, which `--impure` does expose, through $PWD:
+      #
+      #     nix build --impure .#companies-tailored-cvs
+      #
+      # Run it from the repo root, since $PWD is what gets read. Being impure, this attribute is also why `nix flake check` and `nix flake show` fail on the flake — they evaluate it in pure mode.
+      companiesSrc =
+        let pwd = builtins.getEnv "PWD";
+        in
+        if pwd == "" then
+          throw "companies-tailored-cvs reads the .gitignore'd companies/, so it needs: nix build --impure .#companies-tailored-cvs (from the repo root)"
+        else
+          builtins.path {
+            path = /. + pwd + "/companies";
+            name = "companies-src";
+          };
     in
     {
       packages = forAllSystems (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-
-          # Assembles the fetched packages into the directory layout Typst
-          # expects under its cache dir: <cache>/typst/packages/preview/<name>/<version>/
-          typstPackageCache = pkgs.runCommand "typst-package-cache" { } (
-            "mkdir -p $out/preview\n" +
-            pkgs.lib.concatMapStrings
-              (p: ''
-                mkdir -p "$out/preview/${p.name}"
-                ln -s ${pkgs.fetchzip {
-                  url = "https://packages.typst.org/preview/${p.name}-${p.version}.tar.gz";
-                  hash = p.hash;
-                  stripRoot = false;
-                }} "$out/preview/${p.name}/${p.version}"
-              '')
-              typstPackages
-          );
         in
-        {
+        rec {
           default = pkgs.stdenvNoCC.mkDerivation {
             pname = "cv";
             version = "0.1.0";
@@ -49,24 +38,21 @@
             src = ./.;
 
             nativeBuildInputs = [ pkgs.typst ];
-            TYPST_FONT_PATHS = "${pkgs.font-awesome}/share/fonts:${pkgs.lato}/share/fonts";
+            TYPST_FONT_PATHS = "${pkgs.lato}/share/fonts";
 
             buildPhase = ''
               runHook preBuild
 
               export HOME="$TMPDIR"
               mkdir -p "$HOME/.cache/typst"
-              ln -s ${typstPackageCache} "$HOME/.cache/typst/packages"
 
               typst compile cv.typ resume.pdf
-              typst compile cv.typ resume-ATS.pdf --input columnRatio=1
 
               mkdir -p variants
               for variant in variants/*.yaml; do
                 [ -s "$variant" ] || continue
                 name="$(basename "$variant" .yaml)"
                 typst compile cv.typ "variants/resume-$name.pdf" --input fileName="$variant"
-                typst compile cv.typ "variants/resume-$name-ATS.pdf" --input fileName="$variant" --input columnRatio=1
               done
 
               runHook postBuild
@@ -74,44 +60,37 @@
 
             installPhase = ''
               runHook preInstall
+
               mkdir -p $out/variants
-              cp resume.pdf resume-ATS.pdf $out/
+              cp resume.pdf $out/
               cp variants/resume-*.pdf $out/variants/
+
               runHook postInstall
             '';
           };
 
-          job-hunt-specific = pkgs.stdenvNoCC.mkDerivation {
-            pname = "cv-job-hunt-specific";
+          companies-tailored-cvs = pkgs.stdenvNoCC.mkDerivation {
+            pname = "companies-tailored-cvs";
             version = "0.1.0";
 
-            # job-hunt/ is .gitignore'd, so it's absent from the git-filtered source. 
-            # requires: `nix build --impure`
-            src = builtins.path {
-              path = ./job-hunt;
-              name = "job-hunt-src";
-            };
+            src = ./.;
 
             nativeBuildInputs = [ pkgs.typst ];
-            TYPST_FONT_PATHS = "${pkgs.font-awesome}/share/fonts:${pkgs.lato}/share/fonts";
+            TYPST_FONT_PATHS = "${pkgs.lato}/share/fonts";
 
             buildPhase = ''
               runHook preBuild
 
               export HOME="$TMPDIR"
               mkdir -p "$HOME/.cache/typst"
-              ln -s ${typstPackageCache} "$HOME/.cache/typst/packages"
 
-              for dir in */; do
-                [[ ! -d "$dir" ]] && continue
+              cp -r ${companiesSrc} companies
+              chmod -R u+w companies
 
-                if [[ -f "$dir/cv.typ" ]]; then
-                  typst compile "$dir/cv.typ" "$dir/cv.pdf"
-                fi
-
-                if [[ -f "$dir/cover-letter.typ" ]]; then
-                  typst compile "$dir/cover-letter.typ" "$dir/cover-letter.pdf" --root .
-                fi
+              for dir in companies/*/; do
+                dir="''${dir%/}"
+                [ -f "$dir/info.yaml" ] || continue
+                typst compile cv.typ "$dir/cv.pdf" --input fileName="$dir/info.yaml"
               done
 
               runHook postBuild
@@ -119,15 +98,22 @@
 
             installPhase = ''
               runHook preInstall
-              for dir in */; do
-                [[ ! -d "$dir" ]] && continue
-                name="$(basename "$dir")"
-                mkdir -p "$out/$name"
-                [[ -f "$dir/cv.pdf" ]] && cp "$dir/cv.pdf" "$out/$name/"
-                [[ -f "$dir/cover-letter.pdf" ]] && cp "$dir/cover-letter.pdf" "$out/$name/"
+              mkdir -p $out/companies
+
+              for pdf in companies/*/cv.pdf; do
+                [ -e "$pdf" ] || continue
+                name="$(basename "$(dirname "$pdf")")"
+                mkdir -p "$out/companies/$name"
+                cp "$pdf" "$out/companies/$name/michele-decillis_cv.pdf"
               done
               runHook postInstall
             '';
+          };
+
+          # Both of the above under one result/: resume.pdf and variants/ from `default`, companies/ from `companies-tailored-cvs`.
+          all = pkgs.symlinkJoin {
+            name = "cv-all";
+            paths = [ default companies-tailored-cvs ];
           };
         });
 
