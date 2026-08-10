@@ -46,6 +46,9 @@
               export HOME="$TMPDIR"
               mkdir -p "$HOME/.cache/typst"
 
+              # Typst stamps the PDF's CreationDate/ModDate from the clock, which it reads through SOURCE_DATE_EPOCH: stdenv pins that to 1980 for reproducible builds, so every PDF came out dated 1 January 1980.
+              export SOURCE_DATE_EPOCH="$(date +%s)"
+
               typst compile cv.typ resume.pdf
 
               mkdir -p variants
@@ -84,7 +87,6 @@
               export HOME="$TMPDIR"
               mkdir -p "$HOME/.cache/typst"
 
-              # A letter with no `date` falls back to typst's today, which reads SOURCE_DATE_EPOCH: stdenv pins that to 1980 for reproducible builds. This derivation is impure already, so prefer a correct date over a stable one.
               export SOURCE_DATE_EPOCH="$(date +%s)"
 
               cp -r ${companiesSrc} companies
@@ -136,7 +138,6 @@
           mkWatch = { name, entry, default ? null }: pkgs.writeShellScriptBin name ''
             set -euo pipefail
 
-            # Same as in the build: the nix shell pins this to 1980, and a letter without a `date` would preview with that.
             export SOURCE_DATE_EPOCH="$(date +%s)"
 
             file="''${1:-${if default == null then "" else default}}"
@@ -197,6 +198,11 @@
           default = pkgs.mkShell {
             packages = [ pkgs.typst watch watch-letter ];
             TYPST_FONT_PATHS = "${pkgs.font-awesome}/share/fonts:${pkgs.lato}/share/fonts";
+
+            # direnv captures the environment after the hook runs, so the variable stays gone in fish too.
+            shellHook = ''
+              unset SOURCE_DATE_EPOCH
+            '';
           };
         });
     };
